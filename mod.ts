@@ -30,22 +30,11 @@ async function loadPlanetData() {
       stellarRadius > 0.99 && stellarRadius < 1.01;
   });
 
-  return planets.map((planet) => {
-    return _.pick(planet, [
-      "koi_prad",
-      "koi_smass",
-      "koi_srad",
-      "kepler_name",
-      "koi_count",
-      "koi_teq",
-    ]);
-  });
+  return planets.map((planet) => Number(planet["koi_period"]));
 }
 
 const newEarths = await loadPlanetData();
-
-for (const planet of newEarths) {
-  console.log(planet);
-}
-
-console.log(`${newEarths.length} habitable planets found!`);
+const minPeriod = Math.min(...newEarths);
+const maxPeriod = Math.max(...newEarths);
+console.log(`${minPeriod} days was the shortest orbital period found!`);
+console.log(`${maxPeriod} days was the longest orbital period found!`);
