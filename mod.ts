@@ -38,6 +38,7 @@ async function loadPlanetData() {
       "kepler_name",
       "koi_count",
       "koi_teq",
+      "koi_period",
     ]);
   });
 }
@@ -45,7 +46,9 @@ async function loadPlanetData() {
 const newEarths = await loadPlanetData();
 
 for (const planet of newEarths) {
-  console.log(planet);
+  if (planet[6].value > 5) {
+    console.log(planet);
+  }
 }
 
 console.log(`${newEarths.length} habitable planets found!`);
